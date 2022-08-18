@@ -209,6 +209,23 @@ var _ = {};
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
 
+_.map = function(collection, func) {
+    var output = [];
+    if (Array.isArray(collection)) {
+        for (var i = 0; i < collection.length; i++) {
+            output.push(func(collection[i], i, collection))
+        }
+    } else {
+        for (var key in collection) {
+            output.push(func(collection[key], key, collection))
+        }
+    }
+    return output
+}
+
+
+
+
 
 /** _.pluck
 * Arguments:
