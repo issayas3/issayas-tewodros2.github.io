@@ -68,6 +68,7 @@ function arrayOrObject(collection) {
 
 function capitalizeWord(string) {
     var output = '';
+    
     output += string[0].toUpperCase();
     output += string.slice(1)
     return output

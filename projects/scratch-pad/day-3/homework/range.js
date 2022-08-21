@@ -25,12 +25,16 @@ function range(start, end) {
     // YOUR CODE GOES BELOW HERE //
     var outputArray = [];
     
-    for (var i = start; i <= end; i++) {
-        outputArray.push(i)
-        
+    if (start < end) {
+        for (var i = start; i <= end; i++){
+            outputArray.push(i)
+        }
+    } else {
+        for (var i = start; i >= end; i--) {
+            outputArray.push(i)
+        }
     }
-    
-    return outputArray;
+    return outputArray
     
     // YOUR CODE GOES ABOVE HERE //
 }

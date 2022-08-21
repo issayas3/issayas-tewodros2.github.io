@@ -88,7 +88,9 @@ function remove(animals, name) {
 
    function add (animals, animal) {
     for (var i = 0; i < animals.length; i++) {
-        if ()
+        if (aninmals[i].name !== animal.name) {
+
+        }
     }
    }
 

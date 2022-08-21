@@ -22,6 +22,11 @@ var _ = {};
 */
 
 
+_.identity = function(val) {
+    return val
+}
+
+
 /** _.typeOf
 * Arguments:
 *   1) Any value
@@ -42,6 +47,25 @@ var _ = {};
 * _.typeOf([1,2,3]) -> "array"
 */
 
+_.typeOf = function(val) {
+    if (typeof val === 'string') {
+        return 'string'
+    } else if (typeof val === 'boolean') {
+        return 'boolean'
+    } else if (Array.isArray(val) === true) {
+        return 'array'
+    } else if (typeof val === 'number') {
+        return 'number'
+    } else if (typeof val === 'function') {
+        return 'function'
+    } else if (typeof val === 'object' && val !== null) {
+        return 'object'
+    } else if (typeof val === 'undefined') {
+        return 'undefined'
+    } else if (typeof val === 'object' && typeof val !== 'undefined') {
+        return 'null'
+    } 
+}
 
 /** _.first
 * Arguments:
@@ -60,6 +84,8 @@ var _ = {};
 *   _.first(["a", "b", "c"], 1) -> "a"
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
+
+_.first = function()
 
 
 /** _.last

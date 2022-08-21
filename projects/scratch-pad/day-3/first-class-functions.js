@@ -11,18 +11,16 @@
  * return a Function that tests whether a given value is greater than the 
  * base.
  */
-function createGreaterThanFilter(base, val) {
+function createGreaterThanFilter(base) {
     // YOUR CODE BELOW HERE //
-    
-    if (base > val) {
-        return true
-    } else {
-        return false
+    return function(val){
+        return val > base
+    }
     }
     
     
     // YOUR CODE ABOVE HERE //
-}
+
 
 /** 
  * Given an input base to test against, which could be a String or Number, 
@@ -32,7 +30,9 @@ function createGreaterThanFilter(base, val) {
 function createLessThanFilter(base) {
     // YOUR CODE BELOW HERE //
     
-    
+    return function(val) {
+        return val < base
+    }
     
     
     // YOUR CODE ABOVE HERE //
@@ -46,7 +46,13 @@ function createLessThanFilter(base) {
 function createStartsWithFilter(startsWith) {
     // YOUR CODE BELOW HERE //
     
-    
+    return function(string) {
+        if (string[string.length - 1] === startsWith) {
+            return true
+        } else {
+            return false
+        }
+    }
     
     
     // YOUR CODE ABOVE HERE //
@@ -60,7 +66,13 @@ function createStartsWithFilter(startsWith) {
 function createEndsWithFilter(endsWith) {
     // YOUR CODE BELOW HERE //
     
-    
+   return function(string) {
+    if (string[string.length - 1] === endsWith) {
+        return true
+    } else {
+       return false
+    }
+   }
     
     
     // YOUR CODE ABOVE HERE //
@@ -75,9 +87,11 @@ function createEndsWithFilter(endsWith) {
  */
 function modifyStrings(strings, modify) {
     // YOUR CODE BELOW HERE //
-    
-    
-    
+    var output = []
+    for (var i = 0; i < strings.length; i++) {
+        output.push(modify(strings[i]))
+    }
+    return output
     
     // YOUR CODE ABOVE HERE //
 }
@@ -93,9 +107,17 @@ function modifyStrings(strings, modify) {
  */
 function allStringsPass(strings, test) {
     // YOUR CODE BELOW HERE //
-    
-    
-    
+    var output = []
+    for (var i = 0; i < strings.length; i++) {
+        if(test(strings[i])) {
+            output.push(strings[i])
+        }
+    }
+    if (output === strings) {
+        return true
+    } else {
+        return false
+    }
     
     // YOUR CODE ABOVE HERE //
 }
