@@ -98,8 +98,9 @@ function makeContactList() {
             //Iterate through contacts array
             for (var i = 0; i < contacts.length; i++) {
                 //Create a contactsFullName variable set to the current iteration's contact's firstName + lastName
-                var contactFullName = contacts[i].firstName + ' ' + contacts[i].lastName;
+                var contactFullName = contacts[i].nameFirst + ' ' + contacts[i].nameLast;
                 //If contactFullName matches the parameter fullName, return the current iterations object
+                console.log(contacts, fullName)
                 if (contactFullName === fullName) {
                     return contacts[i]
                 }
@@ -113,7 +114,9 @@ function makeContactList() {
                 //If the parameter contact's id is the same value as the current iteration's id
                 if (contact.id === contacts[i].id) {
                     //Return the contacts array with the current iteration removed
-                    return contacts = contacts.splice(i, 1)
+                    console.log(contacts.splice(i, 1))
+                    contacts = contacts.splice(i, 1)
+                    return contacts
                 }
             }
         },
@@ -122,10 +125,10 @@ function makeContactList() {
             var output = []; 
             //Iterate through the contacts array and push each first and last anme concatanated into the output
             for (var i = 0; i < contacts.length; i++) {
-                output.push(contacts[i].firstName + ' ' + contacts[i].lastName)
+                output.push(contacts[i].nameFirst + ' ' + contacts[i].nameLast)
             }
             //Log all the values in the output array joined together with a line break
-            console.log(output.join('\n'))
+            return output.join('\n')
         }
     }
 }

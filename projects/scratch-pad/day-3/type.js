@@ -16,39 +16,34 @@ function isArray(value) {
     // YOUR CODE BELOW HERE //
     
     
-    
+    if (Array.isArray(value)) {
+        return true
+    } else {return false}
     
     // YOUR CODE ABOVE HERE //
 }
 
-/** 
- * Given an input value, return true if the value is an Object intended as a 
- * collection, false if otherwise.
- * 
- * TIP: In JavaScript, how can we decipher if a value is an Object, but not 
- * null, not an Array, not a Date - all of these will return 'object' if used 
- * with typeof.
- */
 function isObject(value) {
     // YOUR CODE BELOW HERE //
     
-    
+    if (typeof value === 'object' && value !== null && Array.isArray(value) === false && value instanceof Date === false) {
+        return true 
+    } else {
+        return false
+    }
     
     
     // YOUR CODE ABOVE HERE //
 }
 
-/** 
- * Given an input value, return true if is either an Array or an an Object 
- * intended as a collection, false if otherwise.
- * 
- * TIP: Similar to isObject, but we must return true if the value is an Array.
- */
 function isCollection(value) {
     // YOUR CODE BELOW HERE //
     
-    
-    
+    if (isArray(value) || isObject(value)) {
+        return true
+    } else {
+        return false
+    }
     
     // YOUR CODE ABOVE HERE //
 }
@@ -75,8 +70,26 @@ function isCollection(value) {
 function typeOf(value) {
     // YOUR CODE BELOW HERE //
     
-    
-    
+    if (typeof value === 'string') {
+        return 'string'
+    } else if (Array.isArray(value)) {
+        return 'array'
+    } else if (typeof value === 'undefined') {
+        return 'undefined'
+    } else if (typeof value === 'number') {
+        return 'number'
+    } else if (typeof value === 'boolean') {
+        return boolean
+    } else if (value === null) {
+        return 'null'
+    } else if (typeof value === 'function') {
+        return 'function'
+    } else if (typeof value === 'object' && value !== null && value instanceof Date === true) {
+        return 'date'
+    } else if (typeof value === 'object' && value !== null ) {
+        return 'object'
+    }
+   
     
     // YOUR CODE ABOVE HERE //
 }
