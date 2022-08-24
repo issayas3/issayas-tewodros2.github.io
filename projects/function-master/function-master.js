@@ -79,7 +79,12 @@ function capitalizeWord(string) {
 //////////////////////////////////////////////////////////////////////
 
 function capitalizeAllWords(string) {
- 
+    let arrayOfWords = string.split(' ');
+    for (var i = 0; i < arrayOfWords.length; i++) {
+        arrayOfWords[i] = arrayOfWords[i][0].toUpperCase() + arrayOfWords[i].slice(1)
+    }
+    console.log(arrayOfWords)
+    return arrayOfWords.join(' ')
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -141,28 +146,44 @@ return object
 //////////////////////////////////////////////////////////////////////
 
 function isFriend(name, object) {
+let flag = false;
+if (object.friends){
 for (var i = 0; i < object.friends.length; i++) {
     if (name === object.friends[i]) {
-        return true
-    } 
+        flag = true
+    }
 }
-return false
+}
+return flag
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 13 - Non-Friends /////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
-
+// Should take a name and a list of people, and return a list of all the names that <name> is not friends with"
 function nonFriends(name, array) {
-
+let output = []
+//iterate through array of people
+for (var i = 0; i < array.length; i++) {
+    //if the parameter name is not the current iterations name..
+    if (array[i].name !== name) {
+        //check to see if it includes the parameter name
+        if (!array[i].friends.includes(name)){
+            //if true then push that person's name into the output array
+            output.push(array[i].name)
+        }
+    }
 }
 
+return output
+}
 //////////////////////////////////////////////////////////////////////
 // Function 14 - Update Object ///////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
 function updateObject(object, key, value) {
-
+ object[key] = value
+ return object
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -170,7 +191,9 @@ function updateObject(object, key, value) {
 //////////////////////////////////////////////////////////////////////
 
 function removeProperties(object, array) {
-
+for (var i = 0; i < array.length; i++) {
+     delete object[array[i]];
+}
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -178,7 +201,8 @@ function removeProperties(object, array) {
 //////////////////////////////////////////////////////////////////////
 
 function dedup(array) {
-
+let unique = [...new Set(array)]
+return unique
 }
 
 //////////////////////////////////////////////////////////////////////
