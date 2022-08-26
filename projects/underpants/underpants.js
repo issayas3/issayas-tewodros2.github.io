@@ -3,6 +3,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 'use strict';
 
+
 var _ = {};
 
 
@@ -52,7 +53,7 @@ _.typeOf = function(val) {
         return 'string'
     } else if (typeof val === 'boolean') {
         return 'boolean'
-    } else if (Array.isArray(val) === true) {
+    } else if (Array.isArray(val)) {
         return 'array'
     } else if (typeof val === 'number') {
         return 'number'
@@ -62,7 +63,7 @@ _.typeOf = function(val) {
         return 'object'
     } else if (typeof val === 'undefined') {
         return 'undefined'
-    } else if (typeof val === 'object' && typeof val !== 'undefined') {
+    } else if (val === null) {
         return 'null'
     } 
 }
@@ -85,7 +86,23 @@ _.typeOf = function(val) {
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
 
-_.first = function()
+_.first = function(array, number) {
+    
+if (!Array.isArray(array) || number <= 0){
+    return []
+} else if (!number || _.typeOf(number) === false){
+    return array[0]
+} else if (number > array.length){
+    return array
+} else {
+    for (let i = 1; i < number; i++) {
+        array.pop()
+    }
+    return array
+}
+
+}
+
 
 
 /** _.last
@@ -107,6 +124,27 @@ _.first = function()
 */
 
 
+_.last = function(array, number) {
+    
+    if (!Array.isArray(array) || number <= 0){
+        return []
+    } else if (!number || _.typeOf(number) === false){
+        return array[array.length - 1]
+    } else if (number > array.length){
+        return array
+    } else {
+        for (let i = 1; i < number; i++) {
+            array.shift()
+        }
+        return array
+    }
+    
+    }
+    
+
+
+
+
 /** _.indexOf
 * Arguments:
 *   1) An array
@@ -124,6 +162,16 @@ _.first = function()
 */
 
 
+_.indexOf = function(array, value){
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] === value) {
+            return i
+        } 
+    }
+    return -1
+}
+
+
 /** _.contains
 * Arguments:
 *   1) An array
@@ -138,6 +186,11 @@ _.first = function()
 * Examples:
 *   _.contains([1,"two", 3.14], "two") -> true
 */
+
+_.contains = function(array, value) {
+    let flag = false
+}
+
 
 
 /** _.each
@@ -235,19 +288,19 @@ _.first = function()
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
 
-_.map = function(collection, func) {
-    var output = [];
-    if (Array.isArray(collection)) {
-        for (var i = 0; i < collection.length; i++) {
-            output.push(func(collection[i], i, collection))
-        }
-    } else {
-        for (var key in collection) {
-            output.push(func(collection[key], key, collection))
-        }
-    }
-    return output
-}
+// _.map = function(collection, func) {
+//     var output = [];
+//     if (Array.isArray(collection)) {
+//         for (var i = 0; i < collection.length; i++) {
+//             output.push(func(collection[i], i, collection))
+//         }
+//     } else {
+//         for (var key in collection) {
+//             output.push(func(collection[key], key, collection))
+//         }
+//     }
+//     return output
+// }
 
 
 
