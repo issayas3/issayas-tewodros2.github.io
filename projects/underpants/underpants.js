@@ -188,7 +188,11 @@ _.indexOf = function(array, value){
 */
 
 _.contains = function(array, value) {
-    let flag = false
+    let flag = false;
+    for (var i = 0; i < array.length; i++){
+        array[i] === value ? flag = true : flag
+    }
+    return flag
 }
 
 
@@ -210,6 +214,20 @@ _.contains = function(array, value) {
 */
 
 
+_.each = function(coll, func){
+    let output = [];
+    if (_.typeOf(coll) === 'array') {
+        for (var i = 0; i < coll.length; i++) {
+            func(coll[i], i, coll)
+        }
+    } else if (_.typeOf(coll) === 'object'){
+        for (var key in coll){
+            func(coll[key], key, coll)
+        }
+    }
+}
+
+
 /** _.unique
 * Arguments:
 *   1) An array
@@ -219,6 +237,11 @@ _.contains = function(array, value) {
 * Examples:
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
+
+_.unique = function (array) {
+   let unique = [...new Set(array)]
+   return unique
+}
 
 
 /** _.filter
@@ -238,6 +261,16 @@ _.contains = function(array, value) {
 */
 
 
+_.filter = function(array, func){
+    let output = [];
+    for (var i = 0; i < array.length; i++) {
+        if (func(array[i], i, array)){
+            output.push(array[i])
+        }
+    }
+    return output
+}
+
 /** _.reject
 * Arguments:
 *   1) An array
@@ -250,6 +283,18 @@ _.contains = function(array, value) {
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
+
+
+
+_.reject = function (array, func) {
+    let output = [];
+    for (var i = 0; i < array.length; i++) {
+        if (!func(array[i], i, array)){
+            output.push(array[i])
+        }
+    }
+    return output
+}
 
 
 /** _.partition
@@ -272,6 +317,22 @@ _.contains = function(array, value) {
 */
 
 
+
+_. partition = function(array, func) {
+    let truthy = [];
+    let falsey = [];
+
+    for (var i = 0; i < array.length; i++) {
+        if (func(array[i], i, array)){
+            truthy.push(array[i])
+        } else {
+            falsey.push(array[i])
+        }
+    }
+    return [truthy, falsey]
+}
+
+
 /** _.map
 * Arguments:
 *   1) A collection
@@ -288,20 +349,20 @@ _.contains = function(array, value) {
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
 
-// _.map = function(collection, func) {
-//     var output = [];
-//     if (Array.isArray(collection)) {
-//         for (var i = 0; i < collection.length; i++) {
-//             output.push(func(collection[i], i, collection))
-//         }
-//     } else {
-//         for (var key in collection) {
-//             output.push(func(collection[key], key, collection))
-//         }
-//     }
-//     return output
-// }
+_.map = function(coll, func) {
+    let output = [];
+    if (_.typeOf(coll) === 'array'){
+        for (var i = 0; i < coll.length; i++) {
+            output.push(func(coll[i], i, coll))
+        }
+    } else if (_.typeOf(coll) === 'object') {
+        for (var key in coll) {
+            output.push(func(coll[key], key, coll))
+        } 
+    }
+    return output
 
+}
 
 
 
@@ -316,6 +377,16 @@ _.contains = function(array, value) {
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
+
+// _.pluck = function(array, prop) {
+//     let output = [];
+
+//     return _.map(array, function(){
+//         output.push(array[prop])
+//    })
+// }
+
+    
 
 
 /** _.every
@@ -340,6 +411,40 @@ _.contains = function(array, value) {
 */
 
 
+_.every = function(coll, func) {
+  let flag = true
+
+    if (!func) {
+        if (_.typeOf(coll) === 'array') {
+            for (let i = 0; i < coll.length; i++) {
+                if (!coll[i]){
+                    return false
+                }
+            }
+        } else if (_.typeOf(coll) === 'object') {
+            for (let key in coll) {
+                if (!coll[key]){
+                    return false
+                }
+            }
+        }
+    } else if (_.typeOf(coll) === 'array') {
+    for (let i = 0; i < coll.length; i++) {
+        if (!func(coll[i], i, coll)) {
+             return false
+        }
+    }
+  } else if (_.typeOf(coll) === 'object') {
+    for (let key in coll) {
+        if (!func(coll[key], key, coll)){
+            return false
+        }
+    }
+  }
+  return flag
+}
+
+
 /** _.some
 * Arguments:
 *   1) A collection
@@ -362,6 +467,39 @@ _.contains = function(array, value) {
 */
 
 
+_.some = function(coll, func){
+    let flag = false;
+
+    if (!func) {
+        if (_.typeOf(coll) === 'array') {
+            for (let i = 0; i < coll.length; i++) {
+                if (coll[i]){
+                     flag = true
+                }
+            }
+        } else if (_.typeOf(coll) === 'object') {
+            for (let key in coll) {
+                if (!coll[key]){
+                     flag = true 
+                }
+            }
+        }
+    } else if (_.typeOf(coll) === 'array') {
+    for (let i = 0; i < coll.length; i++) {
+        if (func(coll[i], i, coll)) {
+              flag = true
+        }
+    }
+  } else if (_.typeOf(coll) === 'object') {
+    for (let key in coll) {
+        if (func(coll[key], key, coll)){
+             flag = true
+        }
+    }
+  }
+  return flag
+}
+
 /** _.reduce
 * Arguments:
 *   1) An array
@@ -382,6 +520,20 @@ _.contains = function(array, value) {
 */
 
 
+_.reduce = function(array, func, seed) {
+    let result;
+    if (!result){
+    for (let i = 0; i < array.length; i++) {
+        result = func(seed, array[i], i)
+    } 
+} else {
+    for (let i = 0; i < array.length; i++) {
+        result = func(result, array[i], i)
+    }
+}
+return result
+}
+
 /** _.extend
 * Arguments:
 *   1) An Object
@@ -396,6 +548,16 @@ _.contains = function(array, value) {
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+
+_.extend = function(){
+    let output = arguments[0]
+console.log(output)
+    for (var i = 0; i < arguments.length; i++) {
+      output = merge(output, arguments[i])
+    }
+ return output
+}
+
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
