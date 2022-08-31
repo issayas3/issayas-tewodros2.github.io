@@ -4,21 +4,57 @@
 // denoted by n!, is the product of all positive integers less than or equal to n.
 // Example:  5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5);  // 120
-var factorial = function(n) {
+
+var factorial = function(n, output) {
+  if (n === 0) {
+    return output
+  }
+
+  output = n * n - 1
+
+  return factorial(n - 1, output)
 };
 
 // 2. Compute the sum of an array of integers.
 // Example:  sum([1, 2, 3, 4, 5, 6]);  // 21
-var sum = function(array) {
+
+var sum = function(array, output) {
+  if (array.length <= 0) {
+    return output
+  }
+
+  output += array[0]
+  return sum(array.slice(1), output)
+
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // Example: arraySum([1,[2,3],[[4]],5]); // 15
-var arraySum = function(array) {
+
+var arraySum = function(array, output) {
+  if (array.length === 0){
+    return output
+  }
+
+  if (!Array.isArray(array[0])){
+    output += array[0]
+    return arraySum(array.slice(1), output)
+  } else {
+    output += array[0][0]
+    return arraySum(array[0].slice(1), output)
+  }
+
 };
 
 // 4. Check if a number is even.
+
 var isEven = function(n) {
+  if (n % 2 === 0) {
+    return true
+  } else {
+    return false
+  }
+
 };
 
 // 5. Sum all integers below a given integer.
@@ -72,6 +108,9 @@ var multiply = function(x, y) {
 // 13. Write a function that divides two numbers without using the / operator  or
 // JavaScript's Math object.
 var divide = function(x, y) {
+  if 
+
+
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers.  The GCD of two
@@ -96,7 +135,7 @@ var createArray = function(str){
 };
 
 // 17. Reverse the order of an array
-var reverseArr = function (array) {
+var reverseArr = function (array, output) {
   if (array.length === 0) {
     return [];
   }

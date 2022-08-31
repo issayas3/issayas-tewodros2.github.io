@@ -378,13 +378,14 @@ _.map = function(coll, func) {
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
 
-// _.pluck = function(array, prop) {
-//     let output = [];
+_.pluck = function(array, prop) {
+  
 
-//     return _.map(array, function(){
-//         output.push(array[prop])
-//    })
-// }
+   return _.map(array, function(val){
+       return val[prop] 
+     })
+
+}
 
     
 
@@ -551,9 +552,8 @@ return result
 
 _.extend = function(){
     let output = arguments[0]
-console.log(output)
     for (var i = 0; i < arguments.length; i++) {
-      output = merge(output, arguments[i])
+      output = Object.assign(output, arguments[i])
     }
  return output
 }
