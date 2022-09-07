@@ -225,6 +225,7 @@ _.each = function(coll, func){
             func(coll[key], key, coll)
         }
     }
+    return output
 }
 
 
@@ -523,16 +524,20 @@ _.some = function(coll, func){
 
 _.reduce = function(array, func, seed) {
     let result;
-    if (!result){
-    for (let i = 0; i < array.length; i++) {
-        result = func(seed, array[i], i)
-    } 
-} else {
-    for (let i = 0; i < array.length; i++) {
-        result = func(result, array[i], i)
+ 
+    if (seed !== undefined) {
+        result = seed;
+        for (let i = 0; i < array.length; i++) {
+            result = func(result, array[i], i, array);
+        }
+    } else {
+        result = array[0];
+        for (let i = 1; i < array.length; i++) {
+            result = func(result, array[i], i, array);
+        }
     }
-}
-return result
+    return result;
+
 }
 
 /** _.extend

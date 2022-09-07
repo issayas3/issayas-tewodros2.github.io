@@ -2,32 +2,58 @@
 // flatten /////////////////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////
 
-function flatten() {
-
+function flatten(array) {
+  return array.reduce((array1, array2) => array1.concat(array2))
 }
 
 // /////////////////////////////////////////////////////////////////////////////
 // loop ////////////////////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////
-
-function loop() {
-
-}
+/*Write a higher-order function loop that provides something like a for loop statement. 
+It takes a value, a test function, an update function, and a body function. 
+Each iteration, it first runs the test function on the current loop value and stops if that returns false. 
+Then it calls the body function, giving it the current value. 
+Finally, it calls the update function to create a new value and starts from the beginning. */
+function loop(value, test, update, body) {
+  for (let i = value; test(i); i = update(i)) {
+    body(i)
+  }
+  }
 
 // /////////////////////////////////////////////////////////////////////////////
 // every ///////////////////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////
 
-function every() {
-
+function every(array, test) {
+ for (var i = 0; i < array.length; i++) {
+  if (test(array[i]) === false) {
+    return false
+  }
+ }
+ return true
 }
 
 // /////////////////////////////////////////////////////////////////////////////
 // dominantDirection ///////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////
 
-function dominantDirection() {
-
+function dominantDirection(text) {
+  let scripts = countBy(text, char => {
+    let script = characterScript(char.codePointAt(0));
+    return script ? script.direction : "none";
+  }).filter(({name}) => name != "none");
+  switch (scripts.length) {
+    case 0:
+      return 'no dominant direction found';
+    case 1:
+      return scripts[0].name;
+    default:
+      if (scripts.reduce((acc, cur) => acc.count === cur.count)) {
+        return 'no dominant direction found';
+      } else {
+        return scripts.reduce((acc, cur) => acc.count >= cur.count ? acc.name : cur.name);
+      }
+  }
 }
 
 // /////////////////////////////////////////////////////////////////////////////
