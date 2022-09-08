@@ -88,17 +88,16 @@ var youngestCustomer = function(array){
     for (var i = 0; i < array.length; i++) {
       let currentBal = array[i].balance;
      currentBal = currentBal.replace(/[^0-9.-]+/g,"");
-      sumOfBal += Number(currentBal)                          
+      sumOfBal += parseFloat(currentBal)                          
     }
-  
-    sumOfBal = Math.round(sumOfBal / array.length)
-    return sumOfBal
+    
+    return sumOfBal / array.length
   }
 
 
   var firstLetterCount = function(array, letter){
 
-    let output = _.filter(array, current => current['name'][0] === letter)
+    let output = _.filter(array, current => current['name'][0].toLowerCase() === letter.toLowerCase())
     let betterOut = [];
   for (var i = 0; i < output.length; i++) {
     betterOut.push(output[i].name)
@@ -117,7 +116,7 @@ var friendFirstLetterCount = function(array, customer, letter){
    }
     let friendsLength = array[index].friends.length;
     for (var i = 0; i < friendsLength; i++) {
-      if (array[index].friends[i].name[0] === letter){
+      if (array[index].friends[i].name[0].toUpperCase() === letter.toUpperCase()){
         counter++
       }
     }
@@ -197,12 +196,14 @@ var genderCount = function(array) {
     "non-binary": 0
   }
   _.reduce(array, function(accumulator, current){
-    for (keys in counterObj) {
-      if (current["gender"] === keys){
-        counterObj[keys] ++ 
-      }
+    if (current.gender === 'male') {
+      counterObj.male += 1
+    } else if (current.gender === 'female') {
+      counterObj.female += 1
+    } else {
+      counterObj['non-binary'] += 1
     }
-  })
+  }, 0)
     return counterObj;
 }
 
